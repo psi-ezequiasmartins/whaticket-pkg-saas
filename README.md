@@ -8,6 +8,7 @@
 ## CRIAR SUBDOMINIO E APONTAR PARA O IP DA SUA VPS ##
 
 FRONTEND_URL: app.seudominio.com
+
 BACKEND_URL:  api.seudominio.com
 
 ## CHECAR PROPAGAÇÃO DO DOMÍNIO ##
