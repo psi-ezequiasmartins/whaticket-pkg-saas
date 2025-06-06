@@ -107,10 +107,15 @@ MAIL_PORT="587"
 Configuração de pagamento GERENCIANET dentro BACKEND no arquivo ENV
 
 GERENCIANET_SANDBOX=true
+
 GERENCIANET_CLIENT_ID=sua-id
+
 GERENCIANET_CLIENT_SECRET=sua_chave_secreta
+
 GERENCIANET_PIX_CERT=nome_do_certificado
+
 GERENCIANET_PIX_KEY=chave_pix_gerencianet
+
 
 # para usar GERENCIANET Em backend\certs
 
