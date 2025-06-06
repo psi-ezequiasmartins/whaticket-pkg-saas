@@ -7,12 +7,9 @@
 
 ## CRIAR SUBDOMINIO E APONTAR PARA O IP DA SUA VPS ##
 
-FRONTEND_URL:
-
+1.  FRONTEND_URL:  
 nexus_app.seudominio.com
-
-BACKEND_URL:
-
+2.  BACKEND_URL:  
 nexus_api.seudominio.com
 
 ## CHECAR PROPAGAÇÃO DO DOMÍNIO ##
@@ -116,8 +113,9 @@ GERENCIANET_PIX_CERT=nome_do_certificado
 GERENCIANET_PIX_KEY=chave_pix_gerencianet
 
 # para usar GERENCIANET Em backend\certs
-# Salvar o certificado no formato .p12
-# Salvar a chave privada no formato .pem
+
+1.  Salvar o certificado no formato .p12
+2.  Salvar a chave privada no formato .pem
 
 ## Customizar a template do Sistema
 
