@@ -1,4 +1,6 @@
-## REQUESITOS BÁSICOS (MÍNIMO)
+<img src="/temp/logo.png" />
+
+## REQUESITOS BÁSICOS (MÍNIMO) PARA INSTALAÇÃO
 <ul>
   <li>UBUNTU 20.04 (OBRIGATORIO)</li>
   <li>VM COM MINIMO: 2CPU 4GB RAM</li>
