@@ -9,7 +9,8 @@
 
 1.  FRONTEND_URL:  
 nexus_app.seudominio.com
-2.  BACKEND_URL:  
+
+3.  BACKEND_URL:  
 nexus_api.seudominio.com
 
 ## CHECAR PROPAGAÇÃO DO DOMÍNIO ##
@@ -67,19 +68,29 @@ Agora, com o ambiente preparado, você pode copiar os arquivos do WhaticketSaaS 
 Com esses passos, seu backup já terá um ambiente limpo, atualizado e pronto para receber o WhaticketSaaS.  
 
 ## 8. Configurar o servidor para receber o WhaticketSaaS
+
 sudo mkdir -p /www/wwwroot
+
 sudo git clone https://github.com/whaticket/whaticket-saas.git /www/wwwroot/whaticket-saas
+
 sudo cd /www/wwwroot/whaticket-saas
+
 sudo clear
+
 sudo ./checklist_srv.sh
+
 sudo ./check.sh
+
 sudo ./check_v2.sh
+
 
 mkdir -p /www/wwwroot/logs
 
 ## 9. Executar o WhaticketSaaS (com o script `whaticketsaas` + log de saída)
 sudo chmod +x whaticketsaas
+
 sudo ./whaticketsaas
+
 
 ## 10. Executar o script `whaticketsaas` e salvar a saída em um arquivo de log
 Você pode executar o script e salvar toda a saída (stdout e stderr) em um arquivo de log assim:
@@ -96,15 +107,19 @@ O script `./whaticketsaas` vai executar o WhaticketSaaS e salvar a saída em um 
 login: admin@admin.com
 senha: 123456
 
-Configuração de e-mail dentro do BACKEND no arquivo ENV
+** Configuração de e-mail dentro do BACKEND no arquivo ENV **
 
 MAIL_HOST="smtp.gmail.com"
+
 MAIL_USER="seu-email"
+
 MAIL_PASS="sua-senha"
+
 MAIL_FROM="seu-email"
+
 MAIL_PORT="587"
 
-Configuração de pagamento GERENCIANET dentro BACKEND no arquivo ENV
+** Configuração de pagamento GERENCIANET dentro BACKEND no arquivo ENV **
 
 GERENCIANET_SANDBOX=true
 
