@@ -1,4 +1,4 @@
-## REQUESITOS 
+## REQUESITOS BÁSICOS (MÍNIMO)
 <ul>
   <li>UBUNTU 20.04 (OBRIGATORIO)</li>
   <li>VM COM MINIMO: 2CPU 4GB RAM</li>
@@ -67,7 +67,7 @@ Agora, com o ambiente preparado, você pode copiar os arquivos do WhaticketSaaS 
 **Resumo:**  
 Com esses passos, seu backup já terá um ambiente limpo, atualizado e pronto para receber o WhaticketSaaS.  
 
-## 8. Configurar o servidor para receber o WhaticketSaaS
+## 8. Configuração do servidor para receber o WhaticketSaaS
 
 sudo mkdir -p /www/wwwroot
 
@@ -132,17 +132,17 @@ GERENCIANET_PIX_CERT=nome_do_certificado
 GERENCIANET_PIX_KEY=chave_pix_gerencianet
 
 
-# para usar GERENCIANET Em backend\certs
+# Para usar GERENCIANET Em backend\certs
 
 1.  Salvar o certificado no formato .p12
 2.  Salvar a chave privada no formato .pem
 
-## Customizar a template do Sistema
+## Customização da template do Sistema
 
 pm2 status
 pm2 stop all
 
-1. Trocar logo
+1. Troca da logo
 cd /home/deploy/SUAEMPRESA/frontend/
 cp /home/deploy/SUAEMPRESA/backend/certs/
 logo.png 200x120 e logologin.png 250x250
@@ -150,15 +150,15 @@ cd /home/deploy/SUAEMPRESA/frontend/
 npm run build
 pm2 restart all
 
-2. Trocar o favicon
+2. Troca do favicon
 https://favicon.io/favicon-converter/
 
-3. Trocar o logo do sistema
+3. Troca da logo do sistema
 cd /home/deploy/SUAEMPRESA/frontend/
 npm run build
 pm2 restart all
 
-4. Mudar a cor: 
+4. Mudança de cores: 
 ( Esse e verde ) #024d18
 Arquivo App.js 
 primary: { main: '#0872b9' },
@@ -166,7 +166,7 @@ cd /home/deploy/SUAEMPRESA/frontend/
 npm run build
 pm2 restart all
 
-5. Trocar a Instania ( Empresa )
+5. Trocar da Instância ( Empresa )
 Arquivo index.html
 cd /home/deploy/SUAEMPRESA/frontend/
 npm run build
