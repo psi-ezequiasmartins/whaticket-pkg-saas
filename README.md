@@ -7,10 +7,10 @@
 
 ## CRIAR SUBDOMINIO E APONTAR PARA O IP DA SUA VPS ##
 
-FRONTEND_URL: 
+FRONTEND_URL:
 nexus_app.seudominio.com
 
-BACKEND_URL:  
+BACKEND_URL:
 nexus_api.seudominio.com
 
 ## CHECAR PROPAGAÇÃO DO DOMÍNIO ##
