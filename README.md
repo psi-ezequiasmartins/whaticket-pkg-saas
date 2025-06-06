@@ -1,8 +1,9 @@
 ## REQUESITOS 
-
--UBUNTU 20.04 (OBRIGATORIO)
--VM COM MINIMO: 2CPU 4GB RAM
--VM COM RECOMENDADO: 4CPU 6GB RAM
+<ul>
+  <li>UBUNTU 20.04 (OBRIGATORIO)</li>
+  <li>VM COM MINIMO: 2CPU 4GB RAM</li>
+  <li>VM COM RECOMENDADO: 4CPU 6GB RAM</li>  
+</ul>
 
 ## CRIAR SUBDOMINIO E APONTAR PARA O IP DA SUA VPS ##
 
@@ -88,10 +89,11 @@ exit
 
 O script `./whaticketsaas` vai executar o WhaticketSaaS e salvar a saída em um arquivo de log chamado `log-install.txt` na pasta `/www/wwwroot/whaticket-saas`. Você pode acessar o arquivo de log em qualquer momento para ver o progresso do processo de instalação.
 
-===================================================
+## login e senha | nexus-app.markagp.com.br
+
 login: admin@admin.com
 senha: 123456
-===================================================
+
 Configuração de e-mail dentro do BACKEND no arquivo ENV
 
 MAIL_HOST="smtp.gmail.com"
@@ -112,12 +114,11 @@ GERENCIANET_PIX_KEY=chave_pix_gerencianet
 # Salvar o certificado no formato .p12
 # Salvar a chave privada no formato .pem
 
-==============================================
-Customizar a template do Sistema
-==============================================
+## Customizar a template do Sistema
+
 pm2 status
 pm2 stop all
--------------------------------------------
+
 1. Trocar logo
 cd /home/deploy/SUAEMPRESA/frontend/
 cp /home/deploy/SUAEMPRESA/backend/certs/
@@ -125,15 +126,15 @@ logo.png 200x120 e logologin.png 250x250
 cd /home/deploy/SUAEMPRESA/frontend/
 npm run build
 pm2 restart all
--------------------------------------------
+
 2. Trocar o favicon
 https://favicon.io/favicon-converter/
--------------------------------------------
+
 3. Trocar o logo do sistema
 cd /home/deploy/SUAEMPRESA/frontend/
 npm run build
 pm2 restart all
--------------------------------------------
+
 4. Mudar a cor: 
 ( Esse e verde ) #024d18
 Arquivo App.js 
@@ -141,10 +142,9 @@ primary: { main: '#0872b9' },
 cd /home/deploy/SUAEMPRESA/frontend/
 npm run build
 pm2 restart all
--------------------------------------------
+
 5. Trocar a Instania ( Empresa )
 Arquivo index.html
 cd /home/deploy/SUAEMPRESA/frontend/
 npm run build
 pm2 restart all
-===========================================
