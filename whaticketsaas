@@ -1,0 +1,130 @@
+#!/bin/bash
+
+export PATH="/root/.nvm/versions/node/v22.16.0/bin:$PATH"
+
+# reset shell colors
+tput init
+
+# resolve source path
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do
+  PROJECT_ROOT="$(cd -P "$(dirname "$SOURCE")" >/dev/null 2>&1 && pwd)"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$PROJECT_ROOT/$SOURCE"
+done
+PROJECT_ROOT="$(cd -P "$(dirname "$SOURCE")" >/dev/null 2>&1 && pwd)"
+
+# required imports
+source "${PROJECT_ROOT}/variables/manifest.sh"
+source "${PROJECT_ROOT}/utils/manifest.sh"
+source "${PROJECT_ROOT}/lib/manifest.sh"
+
+# user configs file
+if [[ ! -e "${PROJECT_ROOT}/config" ]]; then
+  echo "🔐 Arquivo 'config' não encontrado. Criando novo arquivo de configuração..."
+
+  deploy_password="53A794D5DA88526DBBFCCE10F7D57E11"
+  mysql_root_password="FjmYbzuSd9mHPXnSxrgZ8CoTxepahoPy4BjW+5MQtJg="
+  db_pass="387FhYsm0olSm097541HMSdS="
+
+  cat << EOF > "${PROJECT_ROOT}/config"
+deploy_password=${deploy_password}
+mysql_root_password=${mysql_root_password}
+db_pass=${db_pass}
+EOF
+else
+  echo "📄 Arquivo 'config' já existe. Usando configurações existentes."
+fi
+
+# protege arquivo de configuração
+sudo su - root <<EOF
+chown root:root "${PROJECT_ROOT}/config"
+chmod 700 "${PROJECT_ROOT}/config"
+EOF
+
+# carrega as variáveis
+source "${PROJECT_ROOT}/config"
+
+#######################################
+# Valida variáveis obrigatórias do ./config
+#######################################
+validate_env_vars() {
+  REQUIRED_VARS=(
+    deploy_password
+    mysql_root_password
+    db_pass
+    redis_pass
+    jwt_secret
+    jwt_refresh_secret
+    deploy_email
+    db_user
+    db_name
+  )
+
+  MISSING_VARS=()
+
+  for var in "${REQUIRED_VARS[@]}"; do
+    if [[ -z "${!var}" ]]; then
+      MISSING_VARS+=("$var")
+    fi
+  done
+
+  if [[ ${#MISSING_VARS[@]} -ne 0 ]]; then
+    echo ""
+    echo "❌ ERRO: As seguintes variáveis não estão definidas no arquivo ./config:"
+    for var in "${MISSING_VARS[@]}"; do
+      echo "   - $var"
+    done
+    echo ""
+    echo "💡 Corrija o arquivo ./config antes de executar novamente."
+    exit 1
+  else
+    echo "✅ Todas as variáveis obrigatórias estão corretamente definidas!"
+  fi
+}
+
+# executa a validação
+validate_env_vars
+
+# fluxo principal
+
+# interactive CLI
+inquiry_options
+
+# dependencies related
+system_update
+system_node_install
+system_pm2_install
+system_docker_install
+system_snapd_install    # se você tem essa função, ok, senão pode remover, pois o snapd já é instalado dentro do certbot
+system_nginx_install
+system_certbot_install  # garantir instalação certbot antes de usar
+
+# system config
+system_create_user
+
+# backend related
+system_check_services
+system_create_folder
+system_mv_folder
+system_unzip_whaticket
+backend_set_env
+backend_redis_create
+backend_node_dependencies
+backend_node_build
+backend_db_migrate
+backend_db_seed
+backend_start_pm2
+backend_nginx_setup
+
+# frontend related
+frontend_set_env
+frontend_node_dependencies
+frontend_node_build
+frontend_start_pm2
+frontend_nginx_setup
+
+# network related
+system_nginx_conf
+system_nginx_restart
+system_certbot_setup    # aqui o certbot já estará instalado

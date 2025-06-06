@@ -1,0 +1,144 @@
+root@ubuntu:/www/wwwroot# ./checklist_srv.sh
+===== Checklist Pré-Instalação WhaticketSaaS =====
+
+[1] Recursos do servidor:
+  - CPUs: 2
+  - RAM total: 3.8Gi
+  - Espaço em disco em /: 46G livres
+
+[2] Sistema operacional:
+Description:    Ubuntu 22.04.5 LTS
+  - Kernel: 5.15.0-141-generic
+
+[3] Pacotes essenciais:
+  - curl: OK
+  - wget: OK
+  - git: OK
+  - unzip: OK
+  - sudo: OK
+  - lsb-release: OK
+  - ca-certificates: OK
+  - build-essential: OK
+
+[4] Firewall (UFW):
+  - UFW instalado
+  - UFW ativo
+  - Porta SSH liberada
+  - Porta 80 liberada
+  - Porta 443 liberada
+
+[5] Timezone e hostname:
+  - Timezone:                 Time zone: America/Sao_Paulo (-03, -0300)
+  - Hostname: ubuntu
+
+[6] Estrutura de pastas:
+  - /www/wwwroot existe
+drwxr-xr-x 5 root root 4096 Jun  6 10:47 /www/wwwroot
+
+[7] Usuário 'deploy':
+  - Usuário 'deploy' existe
+
+[8] Node.js, npm, pm2:
+  - Node.js: v22.16.0
+    (Versão recomendada 22.x)
+  - npm: 11.4.1
+  - pm2: 6.0.8
+
+[9] nginx, certbot, docker, snapd:
+  - nginx: OK
+  - certbot: OK
+  - docker: OK
+  - snap: OK
+
+[10] Backup:
+  - Confirme se o backup/snapshot foi realizado manualmente!
+
+===== FIM DO CHECKLIST =====
+root@ubuntu:/www/wwwroot# clear
+root@ubuntu:/www/wwwroot# ./checklist_srv.sh
+===== Checklist Pré-Instalação WhaticketSaaS =====
+
+[1] Recursos do servidor:
+  - CPUs: 2
+  - RAM total: 3.8Gi
+  - Espaço em disco em /: 46G livres
+
+[2] Sistema operacional:
+Description:    Ubuntu 22.04.5 LTS
+  - Kernel: 5.15.0-141-generic
+
+[3] Pacotes essenciais:
+  - curl: OK
+  - wget: OK
+  - git: OK
+  - unzip: OK
+  - sudo: OK
+  - lsb-release: OK
+  - ca-certificates: OK
+  - build-essential: OK
+
+[4] Firewall (UFW):
+  - UFW instalado
+  - UFW ativo
+  - Porta SSH liberada
+  - Porta 80 liberada
+  - Porta 443 liberada
+
+[5] Timezone e hostname:
+  - Timezone:                 Time zone: America/Sao_Paulo (-03, -0300)
+  - Hostname: ubuntu
+
+[6] Estrutura de pastas:
+  - /www/wwwroot existe
+drwxr-xr-x 5 root root 4096 Jun  6 10:47 /www/wwwroot
+
+[7] Usuário 'deploy':
+  - Usuário 'deploy' existe
+
+[8] Node.js, npm, pm2:
+  - Node.js: v22.16.0
+    (Versão recomendada 22.x)
+  - npm: 11.4.1
+  - pm2: 6.0.8
+
+[9] nginx, certbot, docker, snapd:
+  - nginx: OK
+  - certbot: OK
+  - docker: OK
+  - snap: OK
+
+[10] Backup:
+  - Confirme se o backup/snapshot foi realizado manualmente!
+
+===== FIM DO CHECKLIST =====
+root@ubuntu:/www/wwwroot# ./check.sh
+
+🚀 Iniciando verificação do ambiente antes de executar ./whaticketsaas
+
+Node.js usado pelo script: /usr/bin/node
+Versão do Node.js: v22.16.0
+Versão do NPM: 11.4.1
+Versão do PM2: 6.0.8
+🔍 Verificando se o usuário 'deploy' existe... OK
+🔍 Verificando existência do arquivo './config'... OK
+🔍 Verificando permissões do './config' (deve ser 700)... OK
+🔍 Verificando se o certbot está instalado... OK
+🔍 Verificando se o nginx está instalado... OK
+🔍 Verificando se o node.js está instalado... OK
+🔍 Verificando se o pm2 está instalado... OK
+🔍 Verificando se o docker está instalado... OK
+🔍 Verificando se o snapd está instalado... OK
+🔍 Verificando permissão de execução do './whaticketsaas'... OK
+
+✅ Tudo pronto para executar ./whaticketsaas com segurança!
+
+root@ubuntu:/www/wwwroot# ./check_v2.sh
+🔍 Iniciando verificação do ambiente (precheck_v2)...
+
+✅ Permissão do arquivo './config': OK
+✅ Propriedade do arquivo './config': OK
+✅ Todas as variáveis obrigatórias estão definidas.
+
+✅ Ambiente validado com sucesso! Você pode executar './whaticketsaas' com segurança.
+
+root@ubuntu:/www/wwwroot#

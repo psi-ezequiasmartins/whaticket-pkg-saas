@@ -1,0 +1,137 @@
+Acesso via SSH - Servidor Absam.io
+==================================
+108.181.223.246
+root
+~@#$121247Ez
+
+Configuração Cloud VPS - Contabo
+================================
+Endereço
+207.244.251.16	
+IP	tipo de servidor
+Cloud VPS 20 NVMe (sem configuração)	
+Localização
+St. Louis (centro dos EUA)	
+IP e porta VNC
+209.126.82.244:63117	
+Senha VNC
+M2VGVbE2
+nome de usuário	
+root		
+8m2WX16sInmEci1wI
+tipo de assinatura		
+Cloud VPS 20 NVMe (sem configuração)	
+Endereço IPv4
+207.244.251.16	
+Sub-rede IPv6
+2605:a140:2263:6667:0000:0000:0000:0001/64
+ftp://root:9gcz6qvq3tht@@108.181.223.246
+
+Acesso via SSH
+==============
+207.244.251.16
+root
+8m2WX16sInmEci1wI
+~$#@121247Em
+~$#@121247Mk
+
+Install for WhaticketPlus
+=========================
+apt update && 
+apt upgrade -y && 
+apt install sudo git -y && 
+sudo rm -rf WhaticketPlus && 
+sudo git clone https://github.com/DEV7Kadu/WhaticketPlus &&
+cd WhaticketPlus && 
+sudo chmod +x ./whaticketplus & 
+./WhaticketPlus
+
+Config Arquivo .env (backend):
+==============================
+NODE_ENV=
+
+# VARIÁVEIS DE SISTEMA
+BACKEND_URL=https://api.markagp.com.br
+ALLOWED_ORIGINS=https://nexus.markagp.com.br
+FRONTEND_URL=https://nexus.markagp.com.br
+PROXY_PORT=443
+PORT=8080
+
+# CREDENCIAIS BANCO DE DADOS
+DB_TIMEZONE=-03:00
+DB_DIALECT=postgres
+DB_HOST=localhost
+DB_USER=postgres
+DB_PASS=2000@23
+DB_NAME=whaticketwhaticketplus
+DB_PORT=5432
+DB_DEBUG=false
+DB_BACKUP=/www/wwwroot/backup
+
+JWT_SECRET=53pJTvkL9T6q2jYFFKwXgvLAgQahwbb/BM0opll5NZM=
+JWT_REFRESH_SECRET=1/n/QnJtfUphUd9CrXjaxRw+jSAxtRIJwFroFmqrRXY=
+
+REDIS_URI=redis://:S3202m097dS=@127.0.0.1:6379
+REDIS_OPT_LIMITER_MAX=1
+REGIS_OPT_LIMITER_DURATION=3000
+
+#MASTER KEY PARA TODOS
+MASTER_KEY=
+
+ENV_TOKEN=
+WHATSAPP_UNREADS=
+
+# FACEBOOK/INSTAGRAM CONFIGS
+VERIFY_TOKEN=Whaticket
+FACEBOOK_APP_ID=
+FACEBOOK_APP_SECRET=
+
+# BROWSER SETTINGS
+BROWSER_CLIENT=
+BROWSER_NAME=Chrome
+BROWSER_VERSION=10.0
+VIEW_QRCODE_TERMINAL=true
+
+# EMAIL
+MAIL_HOST=""
+MAIL_USER=""
+MAIL_PASS=""
+MAIL_FROM=""
+MAIL_PORT=587
+
+GERENCIANET_SANDBOX=false
+GERENCIANET_CLIENT_ID=
+GERENCIANET_CLIENT_SECRET=
+GERENCIANET_PIX_CERT=
+GERENCIANET_PIX_KEY=
+
+OPENAI_API_KEY=
+
+
+Config Arquivo .env (frontend):
+===============================
+REACT_APP_BACKEND_URL=https://api.markagp.com.br
+REACT_APP_ENV_TOKEN=210897ugn217204u98u8jfo2983u5
+REACT_APP_HOURS_CLOSE_TICKETS_AUTO=9999999
+REACT_APP_FACEBOOK_APP_ID=1005318707427295
+REACT_APP_NAME_SYSTEM=whaticketplus
+REACT_APP_VERSION="1.0.0"
+REACT_APP_PRIMARY_COLOR=0fffff
+REACT_APP_PRIMARY_DARK=2c3145
+REACT_APP_NUMBER_SUPPORT=51997059551
+SERVER_PORT=3333
+WDS_SOCKET_PORT=0
+
+Atualização do NodeJS/NPM 
+=========================
+# Install NVM (if not already installed)
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/refs/heads/master/install.sh | bash
+# Close and reopen the terminal
+# List available versions
+nvm ls-remote
+# Install a specific version (e.g., 20.19.2)
+nvm install 20.19.2
+# Switch to the installed version
+nvm use 20.19.2
+# Verify the version
+node -v

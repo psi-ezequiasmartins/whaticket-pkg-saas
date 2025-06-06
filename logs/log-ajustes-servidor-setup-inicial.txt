@@ -1,0 +1,328 @@
+root@ubuntu:/www/wwwroot# chmod 700 ./config
+root@ubuntu:/www/wwwroot# sudo adduser --disabled-password --gecos "" deploy
+Adding user `deploy' ...
+Adding new group `deploy' (1000) ...
+Adding new user `deploy' (1000) with group `deploy' ...
+Creating home directory `/home/deploy' ...
+Copying files from `/etc/skel' ...
+root@ubuntu:/www/wwwroot# sudo usermod -aG sudo deploy
+root@ubuntu:/www/wwwroot# curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+2025-06-06 10:25:05 - Installing pre-requisites
+Hit:1 http://archive.ubuntu.com/ubuntu jammy InRelease
+Hit:2 http://archive.ubuntu.com/ubuntu jammy-updates InRelease
+Hit:3 http://archive.ubuntu.com/ubuntu jammy-security InRelease
+Hit:4 http://archive.canonical.com/ubuntu jammy InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+Reading package lists... Done
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+ca-certificates is already the newest version (20240203~22.04.1).
+curl is already the newest version (7.81.0-1ubuntu1.20).
+gnupg is already the newest version (2.2.27-3ubuntu2.3).
+gnupg set to manually installed.
+The following NEW packages will be installed:
+  apt-transport-https
+0 upgraded, 1 newly installed, 0 to remove and 1 not upgraded.
+Need to get 1510 B of archives.
+After this operation, 170 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 apt-transport-https all 2.4.14 [1510 B]
+Fetched 1510 B in 0s (14.6 kB/s)
+Selecting previously unselected package apt-transport-https.
+(Reading database ... 100307 files and directories currently installed.)
+Preparing to unpack .../apt-transport-https_2.4.14_all.deb ...
+Unpacking apt-transport-https (2.4.14) ...
+Setting up apt-transport-https (2.4.14) ...
+Scanning processes...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+Hit:4 http://archive.ubuntu.com/ubuntu jammy-security InRelease
+Hit:5 http://archive.canonical.com/ubuntu jammy InRelease
+Hit:6 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+Get:7 https://deb.nodesource.com/node_22.x nodistro/main amd64 Packages [6478 B]
+Fetched 18.6 kB in 1s (28.9 kB/s)
+Reading package lists... Done
+2025-06-06 10:25:38 - Repository configured successfully.
+2025-06-06 10:25:38 - To install Node.js, run: apt-get install nodejs -y
+2025-06-06 10:25:38 - You can use N|solid Runtime as a node.js alternative
+2025-06-06 10:25:38 - To install N|solid Runtime, run: apt-get install nsolid -y
+
+root@ubuntu:/www/wwwroot# node -v
+Command 'node' not found, but can be installed with:
+apt install nodejs
+root@ubuntu:/www/wwwroot# sudo apt install -y nodejs
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following NEW packages will be installed:
+  nodejs
+0 upgraded, 1 newly installed, 0 to remove and 1 not upgraded.
+Need to get 36.9 MB of archives.
+After this operation, 225 MB of additional disk space will be used.
+Get:1 https://deb.nodesource.com/node_22.x nodistro/main amd64 nodejs amd64 22.16.0-1nodesource1 [36.9 MB]
+Fetched 36.9 MB in 1s (27.3 MB/s)
+Selecting previously unselected package nodejs.
+(Reading database ... 100311 files and directories currently installed.)
+Preparing to unpack .../nodejs_22.16.0-1nodesource1_amd64.deb ...
+Unpacking nodejs (22.16.0-1nodesource1) ...
+Setting up nodejs (22.16.0-1nodesource1) ...
+Processing triggers for man-db (2.10.2-1) ...
+Scanning processes...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+root@ubuntu:/www/wwwroot# node -v
+v22.16.0
+root@ubuntu:/www/wwwroot# npm -v
+10.9.2
+root@ubuntu:/www/wwwroot# sudo npm install -g pm2
+
+added 135 packages in 10s
+
+13 packages are looking for funding
+  run `npm fund` for details
+npm notice
+npm notice New major version of npm available! 10.9.2 -> 11.4.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.4.1
+npm notice To update run: npm install -g npm@11.4.1
+npm notice
+root@ubuntu:/www/wwwroot# npm install -g npm@11.4.1
+
+removed 14 packages, and changed 65 packages in 4s
+
+25 packages are looking for funding
+  run `npm fund` for details
+root@ubuntu:/www/wwwroot# node -v
+v22.16.0
+root@ubuntu:/www/wwwroot# npm -v
+11.4.1
+root@ubuntu:/www/wwwroot# ./checklist_srv.sh
+===== Checklist Pré-Instalação WhaticketSaaS =====
+
+[1] Recursos do servidor:
+  - CPUs: 2
+  - RAM total: 3.8Gi
+  - Espaço em disco em /: 46G livres
+
+[2] Sistema operacional:
+Description:    Ubuntu 22.04.5 LTS
+  - Kernel: 5.15.0-141-generic
+
+[3] Pacotes essenciais:
+  - curl: OK
+  - wget: OK
+  - git: OK
+  - unzip: OK
+  - sudo: OK
+  - lsb-release: OK
+  - ca-certificates: OK
+  - build-essential: OK
+
+[4] Firewall (UFW):
+  - UFW instalado
+  - UFW ativo
+  - Porta SSH liberada
+  - Porta 80 liberada
+  - Porta 443 liberada
+
+[5] Timezone e hostname:
+  - Timezone:                 Time zone: America/Sao_Paulo (-03, -0300)
+  - Hostname: ubuntu
+
+[6] Estrutura de pastas:
+  - /www/wwwroot existe
+drwxr-xr-x 5 root root 4096 Jun  6 10:07 /www/wwwroot
+
+[7] Backup:
+  - Confirme se o backup/snapshot foi realizado manualmente!
+
+===== FIM DO CHECKLIST =====
+root@ubuntu:/www/wwwroot# ./check.sh
+
+🚀 Iniciando verificação do ambiente antes de executar ./whaticketsaas
+
+Node.js usado pelo script: /usr/bin/node
+Versão do Node.js: v22.16.0
+Versão do NPM: 11.4.1
+Versão do PM2:
+                        -------------
+
+__/\\\\\\\\\\\\\____/\\\\____________/\\\\____/\\\\\\\\\_____
+ _\/\\\/////////\\\_\/\\\\\\________/\\\\\\__/\\\///////\\\___
+  _\/\\\_______\/\\\_\/\\\//\\\____/\\\//\\\_\///______\//\\\__
+   _\/\\\\\\\\\\\\\/__\/\\\\///\\\/\\\/_\/\\\___________/\\\/___
+    _\/\\\/////////____\/\\\__\///\\\/___\/\\\________/\\\//_____
+     _\/\\\_____________\/\\\____\///_____\/\\\_____/\\\//________
+      _\/\\\_____________\/\\\_____________\/\\\___/\\\/___________
+       _\/\\\_____________\/\\\_____________\/\\\__/\\\\\\\\\\\\\\\_
+        _\///______________\///______________\///__\///////////////__
+
+
+                          Runtime Edition
+
+        PM2 is a Production Process Manager for Node.js applications
+                     with a built-in Load Balancer.
+
+                Start and Daemonize any application:
+                $ pm2 start app.js
+
+                Load Balance 4 instances of api.js:
+                $ pm2 start api.js -i 4
+
+                Monitor in production:
+                $ pm2 monitor
+
+                Make pm2 auto-boot at server restart:
+                $ pm2 startup
+
+                To go further checkout:
+                http://pm2.io/
+
+
+                        -------------
+
+[PM2] Spawning PM2 daemon with pm2_home=/root/.pm2
+[PM2] PM2 Successfully daemonized
+6.0.8
+🔍 Verificando se o usuário 'deploy' existe... OK
+🔍 Verificando existência do arquivo './config'... OK
+🔍 Verificando permissões do './config' (deve ser 700)... OK
+🔍 Verificando se o certbot está instalado... FALHOU
+🔍 Verificando se o nginx está instalado... FALHOU
+🔍 Verificando se o node.js está instalado... OK
+🔍 Verificando se o pm2 está instalado... OK
+🔍 Verificando se o docker está instalado... FALHOU
+🔍 Verificando se o snapd está instalado... OK
+🔍 Verificando permissão de execução do './whaticketsaas'... OK
+
+❌ Algumas verificações falharam. Corrija os problemas antes de executar o instalador.
+
+root@ubuntu:/www/wwwroot# ./check_v2.sh
+🔍 Iniciando verificação do ambiente (precheck_v2)...
+
+✅ Permissão do arquivo './config': OK
+✅ Propriedade do arquivo './config': OK
+✅ Todas as variáveis obrigatórias estão definidas.
+
+✅ Ambiente validado com sucesso! Você pode executar './whaticketsaas' com segurança.
+
+root@ubuntu:/www/wwwroot# sudo apt install nginx certbot docker.io snapd -y
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+snapd is already the newest version (2.67.1+22.04).
+snapd set to manually installed.
+The following additional packages will be installed:
+  bridge-utils containerd dns-root-data dnsmasq-base libnginx-mod-http-geoip2
+  libnginx-mod-http-image-filter libnginx-mod-http-xslt-filter libnginx-mod-mail
+  libnginx-mod-stream libnginx-mod-stream-geoip2 nginx-common nginx-core pigz python3-acme
+  python3-certbot python3-configargparse python3-icu python3-josepy python3-parsedatetime
+  python3-requests-toolbelt python3-rfc3339 python3-zope.component python3-zope.event
+  python3-zope.hookable runc ubuntu-fan
+Suggested packages:
+  python-certbot-doc python3-certbot-apache python3-certbot-nginx aufs-tools cgroupfs-mount
+  | cgroup-lite debootstrap docker-buildx docker-compose-v2 docker-doc rinse zfs-fuse | zfsutils
+  fcgiwrap nginx-doc ssl-cert python-acme-doc
+The following NEW packages will be installed:
+  bridge-utils certbot containerd dns-root-data dnsmasq-base docker.io libnginx-mod-http-geoip2
+  libnginx-mod-http-image-filter libnginx-mod-http-xslt-filter libnginx-mod-mail
+  libnginx-mod-stream libnginx-mod-stream-geoip2 nginx nginx-common nginx-core pigz python3-acme
+  python3-certbot python3-configargparse python3-icu python3-josepy python3-parsedatetime
+  python3-requests-toolbelt python3-rfc3339 python3-zope.component python3-zope.event
+  python3-zope.hookable runc ubuntu-fan
+0 upgraded, 29 newly installed, 0 to remove and 1 not upgraded.
+Need to get 81.3 MB of archives.
+After this operation, 307 MB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu jammy/universe amd64 pigz amd64 2.6-1 [63.6 kB]
+Get:2 http://archive.ubuntu.com/ubuntu jammy/main amd64 bridge-utils amd64 1.7-1ubuntu3 [34.4 kB]
+Get:3 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 runc amd64 1.2.5-0ubuntu1~22.04.1 [8093 kB]
+Get:4 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 containerd amd64 1.7.27-0ubuntu1~22.04.1 [37.8 MB]
+Get:5 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 dns-root-data all 2024071801~ubuntu0.22.04.1 [6132 B]
+Get:6 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 dnsmasq-base amd64 2.90-0ubuntu0.22.04.1 [374 kB]
+Get:7 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 docker.io amd64 27.5.1-0ubuntu3~22.04.2 [33.3 MB]
+Get:8 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 nginx-common all 1.18.0-6ubuntu14.6 [40.1 kB]
+Get:9 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libnginx-mod-http-geoip2 amd64 1.18.0-6ubuntu14.6 [12.0 kB]
+Get:10 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libnginx-mod-http-image-filter amd64 1.18.0-6ubuntu14.6 [15.5 kB]
+Get:11 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libnginx-mod-http-xslt-filter amd64Setting up libnginx-mod-http-geoip2 (1.18.0-6ubuntu14.6) ...
+Setting up containerd (1.7.27-0ubuntu1~22.04.1) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/containerd.service → /lib/systemd/system/containerd.service.
+Setting up libnginx-mod-mail (1.18.0-6ubuntu14.6) ...
+Setting up ubuntu-fan (0.12.16) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/ubuntu-fan.service → /lib/systemd/system/ubuntu-fan.service.
+Setting up libnginx-mod-http-image-filter (1.18.0-6ubuntu14.6) ...
+Setting up libnginx-mod-stream (1.18.0-6ubuntu14.6) ...
+Setting up docker.io (27.5.1-0ubuntu3~22.04.2) ...
+Adding group `docker' (GID 121) ...
+Done.
+Created symlink /etc/systemd/system/multi-user.target.wants/docker.service → /lib/systemd/system/docker.service.
+Created symlink /etc/systemd/system/sockets.target.wants/docker.socket → /lib/systemd/system/docker.socket.
+Setting up python3-zope.component (4.3.0-3) ...
+Setting up python3-acme (1.21.0-1ubuntu0.1) ...
+Setting up python3-certbot (1.21.0-1build1) ...
+Setting up certbot (1.21.0-1build1) ...
+Created symlink /etc/systemd/system/timers.target.wants/certbot.timer → /lib/systemd/system/certbot.timer.
+Setting up libnginx-mod-stream-geoip2 (1.18.0-6ubuntu14.6) ...
+Setting up nginx-core (1.18.0-6ubuntu14.6) ...
+ * Upgrading binary nginx                                                                    [ OK ]
+Setting up nginx (1.18.0-6ubuntu14.6) ...
+Processing triggers for man-db (2.10.2-1) ...
+Processing triggers for dbus (1.12.20-2ubuntu4.1) ...
+Processing triggers for ufw (0.36.1-4ubuntu0.1) ...
+Rules updated for profile 'OpenSSH'
+Skipped reloading firewall
+Scanning processes...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+root@ubuntu:/www/wwwroot# ./check.sh
+
+🚀 Iniciando verificação do ambiente antes de executar ./whaticketsaas
+
+Node.js usado pelo script: /usr/bin/node
+Versão do Node.js: v22.16.0
+Versão do NPM: 11.4.1
+Versão do PM2: 6.0.8
+🔍 Verificando se o usuário 'deploy' existe... OK
+🔍 Verificando existência do arquivo './config'... OK
+🔍 Verificando permissões do './config' (deve ser 700)... OK
+🔍 Verificando se o certbot está instalado... OK
+🔍 Verificando se o nginx está instalado... OK
+🔍 Verificando se o node.js está instalado... OK
+🔍 Verificando se o pm2 está instalado... OK
+🔍 Verificando se o docker está instalado... OK
+🔍 Verificando se o snapd está instalado... OK
+🔍 Verificando permissão de execução do './whaticketsaas'... OK
+
+✅ Tudo pronto para executar ./whaticketsaas com segurança!
+
+root@ubuntu:/www/wwwroot# ./check_v2.sh
+🔍 Iniciando verificação do ambiente (precheck_v2)...
+
+✅ Permissão do arquivo './config': OK
+✅ Propriedade do arquivo './config': OK
+✅ Todas as variáveis obrigatórias estão definidas.
+
+✅ Ambiente validado com sucesso! Você pode executar './whaticketsaas' com segurança.
+
+root@ubuntu:/www/wwwroot#
