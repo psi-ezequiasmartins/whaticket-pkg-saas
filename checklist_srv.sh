@@ -1,7 +1,9 @@
 #!/bin/bash
 # checklist_srv.sh - Checklist automático de pré-instalação WhaticketSaaS
  
-echo  Checklist Pré-Instalação WhaticketSaaS"
+clear
+
+echo  "Checklist Pré-Instalação WhaticketSaaS"
 
 # 1. Recursos do servidor
 echo -e "\n[1] Recursos do servidor:"

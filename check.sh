@@ -1,12 +1,14 @@
 #!/bin/bash
- 
+
+clear
+
 # Cores
 RED="\e[31m"
 GREEN="\e[32m"
 YELLOW="\e[33m"
 NC="\e[0m"
 
-check {
+function check {
   echo -ne "${YELLOW}🔍 $1... ${NC}"
   eval "$2" &> /dev/null
   if [ $? -eq 0 ]; then

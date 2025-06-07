@@ -1,9 +1,11 @@
 #!/bin/bash
- 
-echo "🔍 Iniciando verificação do ambiente precheck_v2..."
-echo ""
 
+clear
+
+echo "🚀 Pré-checklist do ambiente para WhaticketSaaS"
+echo "" 
 echo -e "\n🔍 Verificando status dos serviços essenciais..."
+echo "" 
 
 for svc in snapd nginx docker; do
   systemctl is-active --quiet $svc

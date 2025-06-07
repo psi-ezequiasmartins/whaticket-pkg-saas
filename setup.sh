@@ -1,5 +1,10 @@
 #!/bin/bash
 
+clear
+
+echo "🚀 Pré-configuração automática do WhaticketSaaS"
+echo ""
+
 set -e
 
 echo "Iniciando pré-configuração automática WhaticketSaaS Pré-setup..."
@@ -77,9 +82,9 @@ if ! command -v dos2unix &>/dev/null; then
   echo "🔄 Instalando dos2unix..."
   sudo apt-get install -y dos2unix
 fi
-dos2unix ./whaticketsaas.sh
-dos2unix ./checklist_srv.sh
-dos2unix ./check.sh
+dos2unix whaticketsaas
+dos2unix checklist_srv.sh
+dos2unix check.sh
 
 echo "🔄 Pré-configuração concluída!"
 echo ""
