@@ -1,7 +1,7 @@
 #!/bin/bash
 # checklist_srv.sh - Checklist automático de pré-instalação WhaticketSaaS
 
-echo "===== Checklist Pré-Instalação WhaticketSaaS ====="
+echo  Checklist Pré-Instalação WhaticketSaaS"
 
 # 1. Recursos do servidor
 echo -e "\n[1] Recursos do servidor:"
@@ -79,4 +79,4 @@ done
 echo -e "\n[10] Backup:"
 echo "  - Confirme se o backup/snapshot foi realizado manualmente!"
 
-echo -e "\n===== FIM DO CHECKLIST ====="
+echo -e "\n[11] FIM DO CHECKLIST"
