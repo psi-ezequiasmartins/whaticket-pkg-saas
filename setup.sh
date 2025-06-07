@@ -64,7 +64,37 @@ sudo ./checklist_srv.sh
 echo "🔄 Executando check.sh..."
 sudo ./check.sh
 
-echo "🔄 Executando whaticketsaas..."
-sudo ./whaticketsaas
+# 11. Verificar se o script principal tem permissão de execução
+if [ -f ./whaticketsaas ]; then
+  if [ ! -x ./whaticketsaas ]; then
+    echo "🔄 Ajustando permissão de execução do script principal... "
+    sudo chmod +x ./whaticketsaas
+  fi
+fi
+  
+echo "🔄 Convertendo scripts para formato Unix..."
+if ! command -v dos2unix &>/dev/null; then
+  echo "🔄 Instalando dos2unix..."
+  sudo apt-get install -y dos2unix
+fi
+dos2unix ./whaticketsaas.sh
+dos2unix ./checklist_srv.sh
+dos2unix ./check.sh
 
-echo "Pré-configuração concluída!"
+echo "🔄 Pré-configuração concluída!"
+echo " "
+echo "Para iniciar os serviços, execute:"
+echo " "
+echo "sudo systemctl start nginx"
+echo "sudo systemctl start certbot"
+echo "sudo systemctl start docker"
+echo "sudo systemctl start snapd"
+echo "sudo systemctl start whaticketsaas"
+echo " "
+echo "Para verificar o status dos serviços, execute:"
+echo " "
+echo "sudo systemctl status nginx"
+echo "sudo systemctl status certbot"
+echo "sudo systemctl status docker"
+echo "sudo systemctl status snapd"
+echo "sudo systemctl status 
