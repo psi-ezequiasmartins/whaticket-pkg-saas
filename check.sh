@@ -20,12 +20,13 @@ function check {
 }
 
 echo -e "\n🚀 Iniciando verificação do ambiente antes de executar ./whaticketsaas\n"
+echo ""
 
-echo "Node.js usado pelo script: $which node"
-
-echo "Versão do Node.js: $node -v"
-echo "Versão do NPM: $npm -v"
-echo "Versão do PM2: $pm2 -v"
+echo "Node.js usado pelo script: $(which node)"
+echo ""
+echo "Versão do Node.js: $(node -v 2>/dev/null || echo 'Node não encontrado')"
+echo "Versão do NPM: $(npm -v 2>/dev/null || echo 'npm não encontrado')"
+echo "Versão do PM2: $(pm2 -v 2>/dev/null || echo 'pm2 não encontrado')"
 
 FAILED=false
 
@@ -36,7 +37,7 @@ check "Verificando se o usuário 'deploy' existe" "id deploy"
 check "Verificando existência do arquivo './config'" "[ -f ./config ]"
 
 # Verifica permissões do arquivo config
-check "Verificando permissões do './config' deve ser 700" "[[ $stat -c '%a' ./config -eq 700 ]]"
+check "Verificando permissões do './config' deve ser 700" "[[ \$(stat -c '%a' ./config) -eq 700 ]]"
 
 # Verifica se o certbot está instalado
 check "Verificando se o certbot está instalado" "command -v certbot"
