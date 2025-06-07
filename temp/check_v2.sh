@@ -1,6 +1,6 @@
 #!/bin/bash
- 
-echo "🔍 Iniciando verificação do ambiente precheck_v2..."
+
+echo "🔍 Iniciando verificação do ambiente (precheck_v2)..."
 echo ""
 
 echo -e "\n🔍 Verificando status dos serviços essenciais..."
@@ -23,18 +23,18 @@ if [[ ! -f "$CONFIG_FILE" ]]; then
 fi
 
 # Verifica permissões do arquivo
-PERM=$stat -c "%a" "$CONFIG_FILE"
+PERM=$(stat -c "%a" "$CONFIG_FILE")
 if [[ "$PERM" != "600" && "$PERM" != "700" ]]; then
-  echo "⚠️ Permissão atual do '$CONFIG_FILE': $PERM esperado: 600 ou 700"
+  echo "⚠️ Permissão atual do '$CONFIG_FILE': $PERM (esperado: 600 ou 700)"
 else
   echo "✅ Permissão do arquivo '$CONFIG_FILE': OK"
 fi
 
 # Verifica propriedade do arquivo
-OWNER=$stat -c "%U" "$CONFIG_FILE"
-GROUP=$stat -c "%G" "$CONFIG_FILE"
+OWNER=$(stat -c "%U" "$CONFIG_FILE")
+GROUP=$(stat -c "%G" "$CONFIG_FILE")
 if [[ "$OWNER" != "root" || "$GROUP" != "root" ]]; then
-  echo "⚠️ Propriedade atual do '$CONFIG_FILE': $OWNER:$GROUP esperado: root:root"
+  echo "⚠️ Propriedade atual do '$CONFIG_FILE': $OWNER:$GROUP (esperado: root:root)"
 else
   echo "✅ Propriedade do arquivo '$CONFIG_FILE': OK"
 fi
@@ -55,10 +55,10 @@ REQUIRED_VARS=(
   db_name
 )
 
-MISSING_VARS=
+MISSING_VARS=()
 for var in "${REQUIRED_VARS[@]}"; do
   if [[ -z "${!var}" ]]; then
-    MISSING_VARS+="$var"
+    MISSING_VARS+=("$var")
   fi
 done
 
@@ -78,5 +78,3 @@ fi
 echo ""
 echo "✅ Ambiente validado com sucesso! Você pode executar './whaticketsaas' com segurança."
 echo ""
-echo "script atualizado em $(date +%Y-%m-%d) ${USER}" 
-echo "by psi-software - copyright 2025" 

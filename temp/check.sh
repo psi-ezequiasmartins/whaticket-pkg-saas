@@ -1,12 +1,12 @@
 #!/bin/bash
- 
+
 # Cores
 RED="\e[31m"
 GREEN="\e[32m"
 YELLOW="\e[33m"
 NC="\e[0m"
 
-check {
+check() {
   echo -ne "${YELLOW}🔍 $1... ${NC}"
   eval "$2" &> /dev/null
   if [ $? -eq 0 ]; then
@@ -19,11 +19,11 @@ check {
 
 echo -e "\n🚀 Iniciando verificação do ambiente antes de executar ./whaticketsaas\n"
 
-echo "Node.js usado pelo script: $which node"
+echo "Node.js usado pelo script: $(which node)"
 
-echo "Versão do Node.js: $node -v"
-echo "Versão do NPM: $npm -v"
-echo "Versão do PM2: $pm2 -v"
+echo "Versão do Node.js: $(node -v)"
+echo "Versão do NPM: $(npm -v)"
+echo "Versão do PM2: $(pm2 -v)"
 
 FAILED=false
 
@@ -34,7 +34,7 @@ check "Verificando se o usuário 'deploy' existe" "id deploy"
 check "Verificando existência do arquivo './config'" "[ -f ./config ]"
 
 # Verifica permissões do arquivo config
-check "Verificando permissões do './config' deve ser 700" "[[ $stat -c '%a' ./config -eq 700 ]]"
+check "Verificando permissões do './config' (deve ser 700)" "[[ $(stat -c '%a' ./config) -eq 700 ]]"
 
 # Verifica se o certbot está instalado
 check "Verificando se o certbot está instalado" "command -v certbot"
@@ -66,5 +66,3 @@ else
 fi
 
 echo ""
-echo "script atualizado em $(date +%Y-%m-%d) ${USER}" 
-echo "by psi-software - copyright 2025" 

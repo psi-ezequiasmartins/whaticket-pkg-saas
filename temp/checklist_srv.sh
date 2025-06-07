@@ -1,6 +1,6 @@
 #!/bin/bash
 # checklist_srv.sh - Checklist automático de pré-instalação WhaticketSaaS
- 
+
 echo  Checklist Pré-Instalação WhaticketSaaS"
 
 # 1. Recursos do servidor
@@ -20,7 +20,7 @@ for pkg in curl wget git unzip sudo lsb-release ca-certificates build-essential;
   dpkg -s $pkg &>/dev/null && echo "  - $pkg: OK" || echo "  - $pkg: FALTA"
 done
 
-# 4. Firewall UFW
+# 4. Firewall (UFW)
 echo -e "\n[4] Firewall:"
 if command -v ufw &>/dev/null; then
   echo "  - UFW instalado"
@@ -54,7 +54,7 @@ id deploy &>/dev/null && echo "  - Usuário 'deploy' existe" || echo "  - Usuár
 echo -e "\n[8] Node.js, npm, pm2:"
 if command -v node &>/dev/null; then
   echo -n "  - Node.js: "; node -v
-  node -v | grep -q "^v22" && echo "    Versão recomendada 22.x" || echo "    Atenção: versão recomendada é 22.x"
+  node -v | grep -q "^v22" && echo "    (Versão recomendada 22.x)" || echo "    (Atenção: versão recomendada é 22.x)"
 else
   echo "  - Node.js NÃO instalado"
 fi
@@ -80,6 +80,3 @@ echo -e "\n[10] Backup:"
 echo "  - Confirme se o backup/snapshot foi realizado manualmente!"
 
 echo -e "\n[11] FIM DO CHECKLIST"
-echo ""
-echo "script atualizado em $(date +%Y-%m-%d) ${USER}" 
-echo "by psi-software - copyright 2025" 

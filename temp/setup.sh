@@ -2,7 +2,7 @@
 
 set -e
 
-echo "Iniciando pré-configuração automática WhaticketSaaS Pré-setup..."
+echo "Iniciando pré-configuração automática WhaticketSaaS (Pré-setup)..."
 
 # 1. Instalar Node.js 22.x e npm
 if ! command -v node &>/dev/null || ! node -v | grep -q "^v22"; then
@@ -63,7 +63,7 @@ sudo ./checklist_srv.sh
 
 echo "🔄 Executando check.sh..."
 sudo ./check.sh
- 
+
 # 11. Verificar se o script principal tem permissão de execução
 if [ -f ./whaticketsaas ]; then
   if [ ! -x ./whaticketsaas ]; then
@@ -82,22 +82,19 @@ dos2unix ./checklist_srv.sh
 dos2unix ./check.sh
 
 echo "🔄 Pré-configuração concluída!"
-echo ""
+echo " "
 echo "Para iniciar os serviços, execute:"
-echo ""
+echo " "
 echo "sudo systemctl start nginx"
 echo "sudo systemctl start certbot"
 echo "sudo systemctl start docker"
 echo "sudo systemctl start snapd"
 echo "sudo systemctl start whaticketsaas"
-echo ""
+echo " "
 echo "Para verificar o status dos serviços, execute:"
-echo ""
+echo " "
 echo "sudo systemctl status nginx"
 echo "sudo systemctl status certbot"
 echo "sudo systemctl status docker"
 echo "sudo systemctl status snapd"
-echo "sudo systemctl status whaticketsaas"
-echo ""
-echo "script atualizado em $(date +%Y-%m-%d) ${USER}" 
-echo "by psi-software - copyright 2025" 
+echo "sudo systemctl status 

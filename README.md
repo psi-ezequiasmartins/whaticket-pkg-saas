@@ -85,7 +85,6 @@ sudo ./check.sh
 
 sudo ./check_v2.sh
 
-
 mkdir -p /www/wwwroot/logs
 
 ## 9. Executar o WhaticketSaaS (com o script `whaticketsaas` + log de saída)
