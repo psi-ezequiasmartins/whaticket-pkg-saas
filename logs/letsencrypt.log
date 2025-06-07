@@ -1,0 +1,8 @@
+2025-06-07 15:20:51,375:DEBUG:certbot._internal.main:certbot version: 1.21.0
+2025-06-07 15:20:51,375:DEBUG:certbot._internal.main:Location of certbot entry point: /usr/bin/certbot
+2025-06-07 15:20:51,375:DEBUG:certbot._internal.main:Arguments: ['-m', 'deploy@whaticket.com', '--nginx', '--agree-tos', '--non-interactive', '--domains', 'nexus-api.markagp.com.br,nexus-app.markagp.com.br']
+2025-06-07 15:20:51,375:DEBUG:certbot._internal.main:Discovered plugins: PluginsRegistry(PluginEntryPoint#manual,PluginEntryPoint#null,PluginEntryPoint#standalone,PluginEntryPoint#webroot)
+2025-06-07 15:20:51,387:DEBUG:certbot._internal.log:Root logging level set at 30
+2025-06-07 15:20:51,388:DEBUG:certbot._internal.plugins.selection:Requested authenticator nginx and installer nginx
+2025-06-07 15:20:51,388:DEBUG:certbot._internal.plugins.selection:No candidate plugin
+2025-06-07 15:20:51,388:DEBUG:certbot._internal.plugins.selection:Selected authenticator None and installer None

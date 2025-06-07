@@ -74,6 +74,11 @@ system_create_user() {
     # Define a senha do usuário
     echo "deploy:${deploy_password}" | chpasswd
     echo "Usuário 'deploy' criado com sucesso."
+    # Cria diretório para o usuário deploy
+    mkdir -p /home/deploy/nexus
+    # Define permissões para o diretório  
+    sudo chown -R deploy:deploy /home/deploy/nexus
+    sudo chmod -R 755 /home/deploy/nexus    
   else
     echo "Usuário 'deploy' já existe. Pulando criação."
   fi

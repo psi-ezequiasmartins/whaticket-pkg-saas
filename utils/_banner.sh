@@ -20,29 +20,13 @@ print_banner() {
   clear
 
   printf "\n\n"
-
   printf "${GREEN}";
-  printf "                                                     ▄▄█▀▀▀▀▀▀▀█▄▄  \n";
-  printf "                                                   ${GREEN}▄█▀${NC}   ${WHITE}▄▄${NC}      ${GREEN}▀█▄\n";
-  printf "                                                   ${GREEN}█${NC}    ${WHITE}███${NC}         ${GREEN}█\n";
-  printf "                                                   ${GREEN}█${NC}    ${WHITE}██▄         ${GREEN}█${NC}\n";
-  printf "                                                   ${GREEN}█${NC}     ${WHITE}▀██▄${NC} ${WHITE}██${NC}    ${GREEN}█\n";
-  printf "                                                   ${GREEN}█${NC}       ${WHITE}▀███▀${NC}    ${GREEN}█\n";
-  printf "                                                   ${GREEN}▀█▄           ▄█▀\n";
-  printf "                                                    ▄█    ▄▄▄▄█▀▀  \n";
-  printf "                                                    █  ▄█▀        \n";
-  printf "                                                    ▀▀▀▀          \n";
+  printf "INSTALL\n";
   printf "${NC}";
-
   printf "\n"
-
-  printf "${GREEN}";
-  printf "██     ██ ██   ██  █████  ████████ ██  ██████ ██   ██ ███████ ████████\n";
-  printf "██     ██ ██   ██ ██   ██    ██    ██ ██      ██  ██  ██         ██   \n";
-  printf "██  █  ██ ███████ ███████    ██    ██ ██      █████   █████      ██   \n";
-  printf "██ ███ ██ ██   ██ ██   ██    ██    ██ ██      ██  ██  ██         ██   \n";
-  printf " ███ ███  ██   ██ ██   ██    ██    ██  ██████ ██   ██ ███████    ██   \n";
+  printf "${GREY}";
+  printf "NEXUS WHATICKET-SAAS\n";
+  printf "by nexus | markagp.com.br | Development © 2025\n";
   printf "${NC}";
-
   printf "\n"
 }
