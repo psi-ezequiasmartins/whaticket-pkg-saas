@@ -99,10 +99,9 @@ system_mv_folder() {
 
 EOF
   # git clone ${link_git} /home/deploy/${instancia_add}/
-  git clone https://github.com/psi-ezequiasmartins/whaticket-pkg-saas /home/deploy/${instancia_add}/
+  git clone https://github.com/arymaiamedeiros/WhaticketSaas /home/deploy/${instancia_add}/
   sleep 2
 }
-
 #######################################
 # creates folder
 # Arguments:
@@ -380,14 +379,18 @@ system_node_install() {
   sleep 2
 
   sudo su - root <<EOF
-  # curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-  # apt-get install -y nodejs
+  curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+  apt-get install -y nodejs
+  node -v
+  npm -v
+
   sleep 2
+
   npm install -g npm@latest
-  sleep 2
   sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
   wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
   sudo apt-get update -y && sudo apt-get -y install postgresql
+
   sleep 2
   sudo timedatectl set-timezone America/Sao_Paulo
   
@@ -499,14 +502,14 @@ system_pm2_install() {
   printf "${WHITE} 💻 Instalando pm2...${GRAY_LIGHT}"
   printf "\n\n"
 
-  sleep 2
-
-  sudo su - root <<EOF
-  npm install -g pm2
-
-EOF
 
   sleep 2
+
+  sudo npm install -g pm2
+  pm2 -v
+
+  sleep 2
+ 
 }
 
 #######################################
