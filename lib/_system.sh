@@ -99,7 +99,7 @@ system_mv_folder() {
 
 EOF
   # git clone ${link_git} /home/deploy/${instancia_add}/
-  git clone https://github.com/arymaiamedeiros/WhaticketSaas.git /home/deploy/${instancia_add}/
+  git clone https://github.com/psi-ezequiasmartins/whaticket-pkg-saas /home/deploy/${instancia_add}/
   sleep 2
 }
 

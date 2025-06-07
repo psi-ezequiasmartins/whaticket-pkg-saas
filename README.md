@@ -71,9 +71,9 @@ Com esses passos, seu backup já terá um ambiente limpo, atualizado e pronto pa
 
 sudo mkdir -p /www/wwwroot
 
-sudo git clone https://github.com/whaticket/whaticket-saas.git /www/wwwroot/whaticket-saas
+sudo git clone https://github.com/psi-ezequiasmartins/whaticket-pkg-saas /www/wwwroot
 
-sudo cd /www/wwwroot/whaticket-saas
+sudo cd /www/wwwroot
 
 sudo clear
 
