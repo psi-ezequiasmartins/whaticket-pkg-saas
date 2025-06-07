@@ -142,6 +142,7 @@ GERENCIANET_PIX_KEY=chave_pix_gerencianet
 ## Customização da template do Sistema
 
 pm2 status
+
 pm2 stop all
 
 1. Troca da logo
