@@ -98,9 +98,13 @@ sudo ./whaticketsaas
 Você pode executar o script e salvar toda a saída (stdout e stderr) em um arquivo de log assim:
 
 ```sh
-script /www/wwwroot/logs/log-install.txt 2>&1 && ./whaticketsaas
+script /www/wwwroot/logs/log-install.txt 2>&1 && ./whaticketsaas 
 exit
 ```
+> **Atenção:**  
+> Salve o arquivo de log da instalação em `/www/wwwroot/logs` ou outro diretório fora da pasta da instância (`/home/deploy/NOME_DA_INSTANCIA`) para evitar que ele seja apagado durante o processo de `git clone`.
+
+sudo ./whaticketsaas | tee /www/wwwroot/logs/log-install.txt
 
 O script `./whaticketsaas` vai executar o WhaticketSaaS e salvar a saída em um arquivo de log chamado `log-install.txt` na pasta `/www/wwwroot/whaticket-saas`. Você pode acessar o arquivo de log em qualquer momento para ver o progresso do processo de instalação.
 
