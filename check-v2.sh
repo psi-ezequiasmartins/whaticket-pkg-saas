@@ -25,7 +25,9 @@ if [[ ! -f "$CONFIG_FILE" ]]; then
 fi
 
 # Verifica permissões do arquivo
-PERM=$stat -c "%a" "$CONFIG_FILE"
+
+PERM=$(stat -c "%a" "$CONFIG_FILE")
+
 if [[ "$PERM" != "600" && "$PERM" != "700" ]]; then
   echo "⚠️ Permissão atual do '$CONFIG_FILE': $PERM esperado: 600 ou 700"
 else
@@ -33,8 +35,10 @@ else
 fi
 
 # Verifica propriedade do arquivo
-OWNER=$stat -c "%U" "$CONFIG_FILE"
-GROUP=$stat -c "%G" "$CONFIG_FILE"
+
+OWNER=$(stat -c "%U" "$CONFIG_FILE")
+GROUP=$(stat -c "%G" "$CONFIG_FILE")
+
 if [[ "$OWNER" != "root" || "$GROUP" != "root" ]]; then
   echo "⚠️ Propriedade atual do '$CONFIG_FILE': $OWNER:$GROUP esperado: root:root"
 else
@@ -57,10 +61,10 @@ REQUIRED_VARS=(
   db_name
 )
 
-MISSING_VARS=
+MISSING_VARS=()
 for var in "${REQUIRED_VARS[@]}"; do
   if [[ -z "${!var}" ]]; then
-    MISSING_VARS+="$var"
+    MISSING_VARS+=("$var")
   fi
 done
 
