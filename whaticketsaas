@@ -37,10 +37,8 @@ else
 fi
 
 # protege arquivo de configuração
-sudo su - root <<EOF
-chown root:root "${PROJECT_ROOT}/config"
-chmod 700 "${PROJECT_ROOT}/config"
-EOF
+sudo chown root:root "${PROJECT_ROOT}/config"
+sudo chmod 700 "${PROJECT_ROOT}/config"
 
 # carrega as variáveis
 source "${PROJECT_ROOT}/config"
@@ -96,9 +94,9 @@ system_update
 system_node_install
 system_pm2_install
 system_docker_install
-system_snapd_install    # se você tem essa função, ok, senão pode remover, pois o snapd já é instalado dentro do certbot
+system_snapd_install
 system_nginx_install
-system_certbot_install  # garantir instalação certbot antes de usar
+system_certbot_install
 
 # system config
 system_create_user
@@ -127,4 +125,4 @@ frontend_nginx_setup
 # network related
 system_nginx_conf
 system_nginx_restart
-system_certbot_setup    # aqui o certbot já estará instalado
+system_certbot_setup

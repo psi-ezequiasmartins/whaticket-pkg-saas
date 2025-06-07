@@ -1,6 +1,7 @@
 #!/bin/bash
 #
 # functions for setting up app backend
+
 #######################################
 # creates REDIS db using docker
 # Arguments:
@@ -14,21 +15,20 @@ backend_redis_create() {
   sleep 2
 
   sudo su - root <<EOF
-  usermod -aG docker deploy
-  docker run --name redis-${instancia_add} -p ${redis_port}:6379 --restart always --detach redis redis-server --requirepass ${redis_pass}
-
-  sleep 2
-  sudo su - postgres <<EOF
-    createdb ${instancia_add};
-    psql
-    CREATE USER ${instancia_add} SUPERUSER INHERIT CREATEDB CREATEROLE;
-    ALTER USER ${instancia_add} PASSWORD '${db_pass}';
-    \q
-    exit
+usermod -aG docker deploy
+docker run --name redis-${instancia_add} -p ${redis_port}:6379 --restart always --detach redis redis-server --requirepass ${redis_pass}
+sleep 2
+sudo su - postgres <<EOI
+createdb ${instancia_add};
+psql
+CREATE USER ${instancia_add} SUPERUSER INHERIT CREATEDB CREATEROLE;
+ALTER USER ${instancia_add} PASSWORD '${db_pass}';
+\q
+exit
+EOI
 EOF
 
-sleep 2
-
+  sleep 2
 }
 
 #######################################
@@ -48,13 +48,12 @@ backend_set_env() {
   backend_url=${backend_url%%/*}
   backend_url=https://$backend_url
 
-  # ensure idempotency
   frontend_url=$(echo "${frontend_url/https:\/\/}")
   frontend_url=${frontend_url%%/*}
   frontend_url=https://$frontend_url
 
-sudo su - deploy << EOF
-  cat <<[-]EOF > /home/deploy/${instancia_add}/backend/.env
+  sudo su - deploy <<EOF
+cat > /home/deploy/${instancia_add}/backend/.env <<EOL
 NODE_ENV=
 BACKEND_URL=${backend_url}
 FRONTEND_URL=${frontend_url}
@@ -93,8 +92,7 @@ GERENCIANET_PIX_KEY=chave pix gerencianet
 
 # para usar GERENCIANET Em backend\certs
 # Salvar o certificado no formato .p12
-
-[-]EOF
+EOL
 EOF
 
   sleep 2
@@ -113,8 +111,8 @@ backend_node_dependencies() {
   sleep 2
 
   sudo su - deploy <<EOF
-  cd /home/deploy/${instancia_add}/backend
-  npm install
+cd /home/deploy/${instancia_add}/backend
+npm install
 EOF
 
   sleep 2
@@ -133,15 +131,15 @@ backend_node_build() {
   sleep 2
 
   sudo su - deploy <<EOF
-  cd /home/deploy/${instancia_add}/backend
-  npm run build
+cd /home/deploy/${instancia_add}/backend
+npm run build
 EOF
 
   sleep 2
 }
 
 #######################################
-# updates frontend code
+# updates backend code
 # Arguments:
 #   None
 #######################################
@@ -153,20 +151,20 @@ backend_update() {
   sleep 2
 
   sudo su - deploy <<EOF
-  cd /home/deploy/${empresa_atualizar}
-  pm2 stop ${empresa_atualizar}-backend
-  git pull
-  cd /home/deploy/${empresa_atualizar}/backend
-  npm install --force
-  npm update -f
-  npm install @types/fs-extra
-  rm -rf dist 
-  npm run build
-  npx sequelize db:migrate
-  npx sequelize db:migrate
-  npx sequelize db:seed
-  pm2 start ${empresa_atualizar}-backend
-  pm2 save 
+cd /home/deploy/${empresa_atualizar}
+pm2 stop ${empresa_atualizar}-backend
+git pull
+cd /home/deploy/${empresa_atualizar}/backend
+npm install --force
+npm update -f
+npm install @types/fs-extra
+rm -rf dist 
+npm run build
+npx sequelize db:migrate
+npx sequelize db:migrate
+npx sequelize db:seed
+pm2 start ${empresa_atualizar}-backend
+pm2 save 
 EOF
 
   sleep 2
@@ -185,9 +183,9 @@ backend_db_migrate() {
   sleep 2
 
   sudo su - deploy <<EOF
-  cd /home/deploy/${instancia_add}/backend
-  npx sequelize db:migrate
-  npx sequelize db:migrate
+cd /home/deploy/${instancia_add}/backend
+npx sequelize db:migrate
+npx sequelize db:migrate
 EOF
 
   sleep 2
@@ -206,8 +204,8 @@ backend_db_seed() {
   sleep 2
 
   sudo su - deploy <<EOF
-  cd /home/deploy/${instancia_add}/backend
-  npx sequelize db:seed:all
+cd /home/deploy/${instancia_add}/backend
+npx sequelize db:seed:all
 EOF
 
   sleep 2
@@ -227,16 +225,16 @@ backend_start_pm2() {
   sleep 2
 
   sudo su - root <<EOF
-  cd /home/deploy/${instancia_add}/backend
-  pm2 start dist/server.js --name ${instancia_add}-backend
-  pm2 save --force
+cd /home/deploy/${instancia_add}/backend
+pm2 start dist/server.js --name ${instancia_add}-backend
+pm2 save --force
 EOF
 
   sleep 2
 }
 
 #######################################
-# updates frontend code
+# sets up nginx for backend
 # Arguments:
 #   None
 #######################################
@@ -249,8 +247,8 @@ backend_nginx_setup() {
 
   backend_hostname=$(echo "${backend_url/https:\/\/}")
 
-sudo su - root << EOF
-cat > /etc/nginx/sites-available/${instancia_add}-backend << 'END'
+  sudo su - root <<EOF
+cat > /etc/nginx/sites-available/${instancia_add}-backend <<EOL
 server {
   server_name $backend_hostname;
   location / {
@@ -265,7 +263,7 @@ server {
     proxy_cache_bypass \$http_upgrade;
   }
 }
-END
+EOL
 ln -s /etc/nginx/sites-available/${instancia_add}-backend /etc/nginx/sites-enabled
 EOF
 

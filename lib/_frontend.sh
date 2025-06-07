@@ -15,8 +15,8 @@ frontend_node_dependencies() {
   sleep 2
 
   sudo su - deploy <<EOF
-  cd /home/deploy/${instancia_add}/frontend
-  npm install --force
+cd /home/deploy/${instancia_add}/frontend
+npm install --force
 EOF
 
   sleep 2
@@ -35,8 +35,8 @@ frontend_node_build() {
   sleep 2
 
   sudo su - deploy <<EOF
-  cd /home/deploy/${instancia_add}/frontend
-  npm run build
+cd /home/deploy/${instancia_add}/frontend
+npm run build
 EOF
 
   sleep 2
@@ -55,20 +55,19 @@ frontend_update() {
   sleep 2
 
   sudo su - deploy <<EOF
-  cd /home/deploy/${empresa_atualizar}
-  pm2 stop ${empresa_atualizar}-frontend
-  git pull
-  cd /home/deploy/${empresa_atualizar}/frontend
-  npm install
-  rm -rf build
-  npm run build
-  pm2 start ${empresa_atualizar}-frontend
-  pm2 save
+cd /home/deploy/${empresa_atualizar}
+pm2 stop ${empresa_atualizar}-frontend
+git pull
+cd /home/deploy/${empresa_atualizar}/frontend
+npm install
+rm -rf build
+npm run build
+pm2 start ${empresa_atualizar}-frontend
+pm2 save
 EOF
 
   sleep 2
 }
-
 
 #######################################
 # sets frontend environment variables
@@ -82,33 +81,31 @@ frontend_set_env() {
 
   sleep 2
 
-  # ensure idempotency
   backend_url=$(echo "${backend_url/https:\/\/}")
   backend_url=${backend_url%%/*}
   backend_url=https://$backend_url
 
-sudo su - deploy << EOF
-  cat <<[-]EOF > /home/deploy/${instancia_add}/frontend/.env
+  sudo su - deploy <<EOF
+cat > /home/deploy/${instancia_add}/frontend/.env <<EOL
 REACT_APP_BACKEND_URL=${backend_url}
-REACT_APP_HOURS_CLOSE_TICKETS_AUTO = 24
-[-]EOF
+REACT_APP_HOURS_CLOSE_TICKETS_AUTO=24
+EOL
 EOF
 
   sleep 2
 
-sudo su - deploy << EOF
-  cat <<[-]EOF > /home/deploy/${instancia_add}/frontend/server.js
+  sudo su - deploy <<EOF
+cat > /home/deploy/${instancia_add}/frontend/server.js <<EOL
 //simple express server to run frontend production build;
 const express = require("express");
 const path = require("path");
 const app = express();
 app.use(express.static(path.join(__dirname, "build")));
 app.get("/*", function (req, res) {
-	res.sendFile(path.join(__dirname, "build", "index.html"));
+  res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 app.listen(${frontend_port});
-
-[-]EOF
+EOL
 EOF
 
   sleep 2
@@ -127,17 +124,18 @@ frontend_start_pm2() {
   sleep 2
 
   sudo su - root <<EOF
-  cd /home/deploy/${instancia_add}/frontend
-  pm2 start server.js --name ${instancia_add}-frontend
-  pm2 save --force
+cd /home/deploy/${instancia_add}/frontend
+pm2 start server.js --name ${instancia_add}-frontend
+pm2 save --force
 EOF
 
- sleep 2
-  
+  sleep 2
+
   sudo su - root <<EOF
-   pm2 startup
-  sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u deploy --hp /home/deploy
+pm2 startup
+sudo env PATH=\$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u deploy --hp /home/deploy
 EOF
+
   sleep 2
 }
 
@@ -155,9 +153,8 @@ frontend_nginx_setup() {
 
   frontend_hostname=$(echo "${frontend_url/https:\/\/}")
 
-sudo su - root << EOF
-
-cat > /etc/nginx/sites-available/${instancia_add}-frontend << 'END'
+  sudo su - root <<EOF
+cat > /etc/nginx/sites-available/${instancia_add}-frontend <<EOL
 server {
   server_name $frontend_hostname;
 
@@ -173,7 +170,7 @@ server {
     proxy_cache_bypass \$http_upgrade;
   }
 }
-END
+EOL
 
 ln -s /etc/nginx/sites-available/${instancia_add}-frontend /etc/nginx/sites-enabled
 EOF
